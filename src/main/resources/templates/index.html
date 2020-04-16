@@ -1,0 +1,42 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>爬虫启动页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="spanCrawler">
+        <h1>
+            crawler Slate
+        </h1>
+        <div class="well crawler-slate">
+            <p>You have not created any projects yet.</p>
+            <button th:type="button" th:onclick="crawler()" class="btn btn-primary"><i
+                    class="icon-plus icon-white"></i> 开始你的爬虫
+            </button>
+            <button th:type="button" th:onclick="exportExcelInfo()" class="btn btn-primary"><i
+                    class="icon-plus icon-white"></i> 导出机构基本信息
+            </button>
+            <button th:type="button" th:onclick="exportExcelDomain()" class="btn btn-primary"><i
+                    class="icon-plus icon-white"></i> 导出签字人及领域
+            </button>
+            <button th:type="button" th:onclick="exportExcelTest()" class="btn btn-primary"><i
+                    class="icon-plus icon-white"></i> 导出检验能力范围
+            </button>
+        </div>
+        <div class="well crawler-slate" style="overflow-y: scroll; height: 65%">
+            <table id="message" th:class="ridge">
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
