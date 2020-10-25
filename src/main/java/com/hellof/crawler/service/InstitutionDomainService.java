@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author 90934
  * @date 2020/2/7 0:19
- * @description 认可的签字人及领域的service层
+ * @description 认可的签字人及领域的service层接口
  * @since 0.1.0
  */
 @Component

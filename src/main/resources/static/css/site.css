@@ -181,9 +181,12 @@ h1 {
 
 table.ridge {
     text-align: center;
-    display: block ruby
+    display: block ruby;
+    margin: 0 auto;
 }
 
 td.dashed {
     border-style: dashed;
+    /*width: */
+    /*margin: 0 auto;*/
 }

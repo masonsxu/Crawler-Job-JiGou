@@ -36,11 +36,11 @@ public class ProductWebSocket {
     /**
      * concurrent包的线程安全set，用来存放每个客户端对应的ProductWebSocket对象。
      */
-    private static CopyOnWriteArrayList<ProductWebSocket> webSocketSet = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<ProductWebSocket> webSocketSet = new CopyOnWriteArrayList<>();
     /**
      * 与某个客户端的链接会话，需要通过它来给客户发送数据
      */
-    private Session session;
+    private volatile Session session;
 
     /**
      * 链接建立成功调用的方法
@@ -77,7 +77,7 @@ public class ProductWebSocket {
      */
     @OnMessage
     public void onMessage(String message) {
-        log.info("当前爬取的数据为: " + message);
+        log.info("当前爬取的数据为: " + message + session);
     }
 
     /**
@@ -91,8 +91,10 @@ public class ProductWebSocket {
 
     public void sendMessage(String message) {
         try {
-            this.session.getBasicRemote().sendText(message);
-            log.info("数据获取成功，数据为: " + message);
+            synchronized (this.session){
+                this.session.getBasicRemote().sendText(message);
+                log.info("数据获取成功，数据为: " + message);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

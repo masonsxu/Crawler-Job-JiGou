@@ -43,14 +43,14 @@ public class InstitutionInfoServiceImpl implements InstitutionInfoService {
         //执行查询
         List<InstitutionInfo> list = this.findInstitutionInfo(param);
 
-        //判断查询结果是否为空
-        if (list.size() == 0) {
-            //如果结果为空，表示机构基本信息不存在，需要更新数据库
-            this.institutionInfoDao.save(institutionInfo);
-        }
         //打开注释，将爬取的数据显示到web端页面进行查看，注意当爬虫数据过快已造成页面崩溃
         try {
-            ProductWebSocket.sendInfo("已成功采集 1 条数据！");
+            //判断查询结果是否为空
+            if (list.size() == 0) {
+                //如果结果为空，表示机构基本信息不存在，需要更新数据库
+                this.institutionInfoDao.save(institutionInfo);
+                ProductWebSocket.sendInfo("1");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

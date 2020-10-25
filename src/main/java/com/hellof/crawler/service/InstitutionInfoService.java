@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * @author 90934
+ *
+ * description 机构的基本信息的service层接口
  */
 
 @Component

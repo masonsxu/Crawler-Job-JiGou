@@ -37,26 +37,26 @@ public class InstitutionTestServiceImpl implements InstitutionTestService {
     public void save(List<InstitutionTest> institutionTests) {
         //根据所属机构名称、检验对象序号和检验对象进行查询
         InstitutionTest param = new InstitutionTest();
-        //遍历JSON数组
-        for (InstitutionTest institutionTest : institutionTests) {
-            param.setIname(institutionTest.getIname());
-            param.setNum(institutionTest.getNum());
-            param.setFieldch(institutionTest.getFieldch());
-            param.setDetnum(institutionTest.getDetnum());
-            param.setDescriptch(institutionTest.getDescriptch());
-            param.setStdnum(institutionTest.getStdnum());
-            param.setStandardchorder(institutionTest.getStandardchorder());
-            //执行查询
-            List<InstitutionTest> list = this.findInstitutionTest(param);
-            if (list.size() == 0) {
-                this.institutionTestDao.save(institutionTest);
+
+        try {
+            //遍历JSON数组
+            for (InstitutionTest institutionTest : institutionTests) {
+                param.setIname(institutionTest.getIname());
+                param.setNum(institutionTest.getNum());
+                param.setFieldch(institutionTest.getFieldch());
+                param.setDetnum(institutionTest.getDetnum());
+                param.setDescriptch(institutionTest.getDescriptch());
+                param.setStdnum(institutionTest.getStdnum());
+                param.setStandardchorder(institutionTest.getStandardchorder());
+                //执行查询
+                List<InstitutionTest> list = this.findInstitutionTest(param);
+                if (list.size() == 0) {
+                    this.institutionTestDao.save(institutionTest);
+                    ProductWebSocket.sendInfo("1");
+                }
             }
-            //打开注释，将爬取的数据显示到web端页面进行查看，注意当爬虫数据过快已造成页面崩溃
-            try {
-                ProductWebSocket.sendInfo("已成功采集 " + institutionTests.size() + " 条数据！");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

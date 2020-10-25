@@ -153,14 +153,22 @@ window.onbeforeunload = function () {
 	setMessageInnerHTML("爬虫通道已关闭");
 }
 
-
+let allJd = 0
 //将消息显示在网页上
 function setMessageInnerHTML(innerHTML) {
+    function times(str, num){
+        return num > 1 ? str += times(str, --num): str;
+    }
+    let htmls = "<td class='dashed'>" + innerHTML + "</td>"
 	if (innerHTML.toString() === "爬虫采集已结束,请在数据库中进行查看,或导出为Excel格式进行查看！") {
-		alert(innerHTML)
-		document.getElementById('message').innerHTML = "<td class='dashed'>" + innerHTML + "</td>"
-	} else {
-		document.getElementById('message').innerHTML += "<td class='dashed'>" + innerHTML + "</td>";
+		document.getElementById('message').innerHTML += htmls
+	} else  if (innerHTML.length === 1){
+        allJd += 1
+        console.log(typeof (allJd))
+        let pointNum = times('.', Math.round(allJd/500))
+        document.getElementById('message').innerHTML = "<td class='dashed'>当前已采集数据" + allJd + "条</td><tr><td class='dashed'>数据采集中，请稍后..."+pointNum+"</td></tr>"
+    } else {
+		document.getElementById('message').innerHTML += htmls
 	}
 }
 

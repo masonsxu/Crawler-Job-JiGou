@@ -56,11 +56,12 @@ public class JobProcessor implements PageProcessor {
             String url = page.getUrl().toString();
             driver.get(url);
             //获得配置文件中的省份名称
-            List<String> addressList = GetAddress.resultData();
+//            List<String> addressList = GetAddress.resultData();
             //方便测试
-//            List<String> addressList = new ArrayList<>();
+            List<String> addressList = new ArrayList<>();
 //            addressList.add("北京");
-//            addressList.add("天津");
+//            addressList.add("香港");
+            addressList.add("天津");
             for (String address : addressList) {
                 WebElement orgAddress = driver.findElement(By.id("orgAddress"));
                 orgAddress.clear();
@@ -69,7 +70,7 @@ public class JobProcessor implements PageProcessor {
                 WebElement btn = driver.findElement(By.className("btn"));
                 btn.click();
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -100,7 +101,7 @@ public class JobProcessor implements PageProcessor {
                                 //获取id
                                 String urlStr = selectable.regex("id\\=\\w+").toString();
                                 //组装url放入待爬取队列
-                                urls.add("https://las.cnas.org.cn/LAS/publish/queryOrgInfo1.action?" + urlStr);
+                                urls.add("https://las.cnas.org.cn/LAS_FQ/publish/queryOrgInfo1.action?" + urlStr);
                             }
                         }
                         if (num <= maxPage - 2) {
@@ -178,13 +179,13 @@ public class JobProcessor implements PageProcessor {
         institutionInfo.setBaseinfoid(dataUrl);
         if (dataUrl != null && dataUrl.length() != 0) {
             //认可的授权签字人及领域
-            String domainUrl = "https://las.cnas.org.cn/LAS/publish/queryPublishSignatory.action?baseinfoId=" + dataUrl;
+            String domainUrl = "https://las.cnas.org.cn/LAS_FQ/publish/queryPublishSignatory.action?baseinfoId=" + dataUrl;
             //放进待爬取队列
             page.addTargetRequest(domainUrl);
 
             //认可的检验能力范围
             String scopeUrl =
-                    "https://las.cnas.org.cn/LAS/publish/queryPublishIBAbilityQuery.action?baseinfoId=" + dataUrl;
+                    "https://las.cnas.org.cn/LAS_FQ/publish/queryPublishIBAbilityQuery.action?baseinfoId=" + dataUrl;
             //放进待爬取队列
             page.addTargetRequest(scopeUrl);
         }
