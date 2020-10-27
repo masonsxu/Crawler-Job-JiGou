@@ -56,12 +56,8 @@ public class JobProcessor implements PageProcessor {
             String url = page.getUrl().toString();
             driver.get(url);
             //获得配置文件中的省份名称
-//            List<String> addressList = GetAddress.resultData();
-            //方便测试
-            List<String> addressList = new ArrayList<>();
-//            addressList.add("北京");
-//            addressList.add("香港");
-            addressList.add("天津");
+            // 如果需要爬取个别省份的数据，可以通过修改配置文件重的 address.txt 来获取个别省份的数据
+            List<String> addressList = GetAddress.resultData();
             for (String address : addressList) {
                 WebElement orgAddress = driver.findElement(By.id("orgAddress"));
                 orgAddress.clear();
