@@ -13,7 +13,7 @@
 5. **Web前端逻辑编写**
 6. **SpringBoot整合项目启动类**
 
-==**下面是各个模块代码的详细介绍**==
+**下面是各个模块代码的详细介绍**
 
 ## 2、数据的存储
 
@@ -130,7 +130,7 @@
           List<InstitutionInfo> list = this.findInstitutionInfo(param);
   
           //判断查询结果是否为空
-          if (list.size() == 0) {
+          if (list.size()  0) {
               //如果结果为空，表示机构基本信息不存在，需要更新数据库
               this.institutionInfoDao.save(institutionInfo);
           }
@@ -343,7 +343,7 @@
                     bodyRow.createCell(0).setCellValue(index++);
                     int flag = 0;
                     for (ExportFieldBean fieldBean: fieldBeans){
-                        if (flag == 0){
+                        if (flag  0){
                             bodyRow.createCell(bodyRow.getLastCellNum()).setCellValue((Integer) ((JSONObject)obj).get(fieldBean.getFieldCode()));
                             flag = 1;
                         }else {
@@ -1288,7 +1288,7 @@ window.onbeforeunload = function () {
 
 //将消息显示在网页上
 function setMessageInnerHTML(innerHTML) {
-	if (innerHTML.toString() === "爬虫采集已结束,请在数据库中进行查看,或导出为Excel格式进行查看！") {
+	if (innerHTML.toString() = "爬虫采集已结束,请在数据库中进行查看,或导出为Excel格式进行查看！") {
 		alert(document.getElementById('message').innerHTML = "<td class='dashed'>" + innerHTML + "</td>")
 	} else {
 		document.getElementById('message').innerHTML += "<td class='dashed'>" + innerHTML + "</td>";
@@ -1688,7 +1688,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
 
 ### 2）开始爬虫
 
-==本项目中的爬虫因为网页采用的异步加载的初始信息，所以使用的是selenium进行页面的渲染，并且有着验证码阻碍爬虫的进行，考虑的短时间内的效率问题，所以没有使用机器识别，需人工手动输入验证码内容以获取初始信息。==
+本项目中的爬虫因为网页采用的异步加载的初始信息，所以使用的是selenium进行页面的渲染，并且有着验证码阻碍爬虫的进行，考虑的短时间内的效率问题，所以没有使用机器识别，需人工手动输入验证码内容以获取初始信息。
 
 * **人工验证获得初始链接**
   * ![image-20200302195727670](https://gitee.com/masonsxu/cloudimg/raw/master/img/image-20200302195727670.png)
@@ -1707,7 +1707,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
 
 ### 3）项目运行时可能出现的问题
 
-1. ==问题：当爬取速度过快或数据过多的是啥web页面可能会崩溃==
-   1. ==解决办法：刷新页面即可，爬虫进程并不会影响==
-2. ==如果需要更换爬虫网址，只需要模仿JobProcess类重新编写爬虫逻辑、或者直接修改Jobprocess类即可==
-3. ==当更换爬虫网址的时候除：**websocket**、**util**、**mapper**、**io**、**export**这五个包中的方法和SpringBoot启动类不需要更改以外，其他包中的类都需要进行相应的修改。==
+1. 问题：当爬取速度过快或数据过多的是啥web页面可能会崩溃
+   1. 解决办法：刷新页面即可，爬虫进程并不会影响
+2. 如果需要更换爬虫网址，只需要模仿JobProcess类重新编写爬虫逻辑、或者直接修改Jobprocess类即可
+3. 当更换爬虫网址的时候除：**websocket**、**util**、**mapper**、**io**、**export**这五个包中的方法和SpringBoot启动类不需要更改以外，其他包中的类都需要进行相应的修改。
